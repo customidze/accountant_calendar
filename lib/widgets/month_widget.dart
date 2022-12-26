@@ -22,11 +22,12 @@ class MonthWidget extends StatelessWidget {
           tileColor:
               selectedMonth == name ? Colors.amberAccent : Colors.blueGrey,
           onTap: () {
-            if (this.index == 0) {
+            if (index == 0) {
               mainText = janyarText;
-            } else if (this.index == 1) {
+            } else if (index == 1) {
               mainText = februarText;
             }
+            selectedMonthIndex = index;
             selectedMonth = name;
             upd();
           },

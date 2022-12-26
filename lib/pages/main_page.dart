@@ -15,13 +15,20 @@ class _MainPageState extends State<MainPage> {
 
   YearModel ym = YearModel();
   upd() {
-    scTExt.animateTo(scTExt.position.minScrollExtent,
-        duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+    // scTExt.animateTo(scTExt.position.minScrollExtent,
+    //     duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+    // scTExt.animateTo(ym.position[selectedMonthIndex!],
+    //     duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+    scTExt.jumpTo(ym.position[selectedMonthIndex!]);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    scTExt.addListener(() {
+      print(scTExt.offset);
+      ym.position[selectedMonthIndex!] = scTExt.offset.toDouble();
+    });
     scMonth.addListener(
       () {
         final postion = scMonth.offset / scMonth.position.maxScrollExtent;
