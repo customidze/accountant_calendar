@@ -1,12 +1,18 @@
 import 'package:accountant_calendar/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
   
   runApp(MyApp());
 }
 
 String? selectedMonth;
+
+DateTime year = DateTime.now();
+
+String mainText = 'Test';
+
 
 class MyApp extends StatelessWidget {
   

@@ -19,6 +19,7 @@ class MonthWidget extends StatelessWidget {
           tileColor:
               selectedMonth == name ? Colors.amberAccent : Colors.blueGrey,
           onTap: () {
+            mainText = name;
             selectedMonth = name;
             upd();
           },

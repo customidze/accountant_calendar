@@ -1,35 +1,37 @@
+import 'package:accountant_calendar/main.dart';
 import 'package:accountant_calendar/models/year_model.dart';
+import 'package:accountant_calendar/widgets/drawer_widget.dart';
 import 'package:accountant_calendar/widgets/month_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
-  
-
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
   final scMonth = ScrollController();
-  
+
   YearModel ym = YearModel();
-  upd(){
-    setState(() {
-      
-    });
+  upd() {
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
-    scMonth.addListener(() {
-      final postion = scMonth.offset / scMonth.position.maxScrollExtent;
+    scMonth.addListener(
+      () {
+        final postion = scMonth.offset / scMonth.position.maxScrollExtent;
 
-      if(postion>= 0.9){
-        print(postion);
-      }
-
-    },);
+        if (postion >= 0.9) {
+          print(postion);
+        }
+      },
+    );
     return Scaffold(
-      appBar: AppBar(),
+      drawer: DrawerWidget(),
+      appBar:
+          AppBar(title: const Text('Календарь бухгалтера'), centerTitle: true ),
       body: Column(
         children: [
           SizedBox(
@@ -37,7 +39,12 @@ class _MainPageState extends State<MainPage> {
             // width: MediaQuery.of(context).size.width * 0.4,
             child: Stack(
               children: [
-                Center(child: Text('2022',style: TextStyle(color: Color.fromARGB(117, 255, 82, 82),fontSize: 60),)),
+                Center(
+                    child: Text(
+                  year.year.toString(),
+                  style: TextStyle(
+                      color: Color.fromARGB(117, 255, 82, 82), fontSize: 60),
+                )),
                 ListView.builder(
                     controller: scMonth,
                     scrollDirection: Axis.horizontal,
@@ -48,7 +55,15 @@ class _MainPageState extends State<MainPage> {
                         upd: upd,
                       );
                     }),
-                    
+              ],
+            ),
+          ),
+          SizedBox(
+            
+            height: MediaQuery.of(context).size.height * 0.775,
+            child: ListView(
+              children: [
+                Text(mainText),
               ],
             ),
           )
