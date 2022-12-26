@@ -1,11 +1,14 @@
 import 'package:accountant_calendar/main.dart';
+import 'package:accountant_calendar/txt_files/text.dart';
 import 'package:flutter/material.dart';
 
 class MonthWidget extends StatelessWidget {
-  MonthWidget({super.key, required this.name, required this.upd});
+  MonthWidget(
+      {super.key, required this.name, required this.upd, required this.index});
   String name;
   Function upd;
-  
+  int index;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -15,11 +18,15 @@ class MonthWidget extends StatelessWidget {
         width: 100,
         child: ListTile(
           //hoverColor: Colors.amber,
-
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           tileColor:
               selectedMonth == name ? Colors.amberAccent : Colors.blueGrey,
           onTap: () {
-            mainText = name;
+            if (this.index == 0) {
+              mainText = janyarText;
+            } else if (this.index == 1) {
+              mainText = februarText;
+            }
             selectedMonth = name;
             upd();
           },

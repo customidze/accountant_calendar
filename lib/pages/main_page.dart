@@ -11,9 +11,12 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final scMonth = ScrollController();
+  final scTExt = ScrollController();
 
   YearModel ym = YearModel();
   upd() {
+    scTExt.animateTo(scTExt.position.minScrollExtent,
+        duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
     setState(() {});
   }
 
@@ -31,9 +34,12 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       drawer: DrawerWidget(),
       appBar:
-          AppBar(title: const Text('Календарь бухгалтера'), centerTitle: true ),
+          AppBar(title: const Text('Календарь бухгалтера'), centerTitle: true),
       body: Column(
         children: [
+          SizedBox(
+            height: 2,
+          ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
             // width: MediaQuery.of(context).size.width * 0.4,
@@ -45,7 +51,12 @@ class _MainPageState extends State<MainPage> {
                   style: TextStyle(
                       color: Color.fromARGB(117, 255, 82, 82), fontSize: 60),
                 )),
-                ListView.builder(
+                ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        width: 2,
+                      );
+                    },
                     controller: scMonth,
                     scrollDirection: Axis.horizontal,
                     itemCount: ym.month.length,
@@ -53,15 +64,16 @@ class _MainPageState extends State<MainPage> {
                       return MonthWidget(
                         name: ym.month[index],
                         upd: upd,
+                        index: index,
                       );
                     }),
               ],
             ),
           ),
           SizedBox(
-            
             height: MediaQuery.of(context).size.height * 0.775,
             child: ListView(
+              controller: scTExt,
               children: [
                 Text(mainText),
               ],
