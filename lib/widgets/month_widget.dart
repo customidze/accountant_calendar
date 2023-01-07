@@ -26,6 +26,12 @@ class MonthWidget extends StatelessWidget {
               mainText = janyarText;
             } else if (index == 1) {
               mainText = februarText;
+            } else if (index == 2) {
+              mainText = marchText;
+            } else if (index == 3) {
+              mainText = aprilText;
+            } else if (index == 4) {
+              mainText = mayText;
             }
             selectedMonthIndex = index;
             selectedMonth = name;
